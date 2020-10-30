@@ -46,16 +46,7 @@ class TestWordTree(unittest.TestCase):
         result = wordTree.searchNode(tree, "capitalword")
         self.assertEqual(result, 1)
 
- 
-'''
-    def test_createTreeWithInvalidFileName(self):
-        result = wordTree.createTree("testFile")
-        self.assertEqual(result, 0)
-
-    def test_createTreeWithValidFile(self):
-        result = wordTree.createTree("fileToRead")
-        self.assertNotEqual(result, 0)
-'''        
+        
 
 if __name__ == '__main__':
     unittest.main()
