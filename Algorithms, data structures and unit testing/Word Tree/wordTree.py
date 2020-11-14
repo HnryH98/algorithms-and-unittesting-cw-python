@@ -4,18 +4,15 @@ from string import punctuation#for removing punctuation from words
 
 '''Read file and then store unique words as nodes in a binary tree.
 Then allow searching the nodes.
-Can also print the tree in pre-order'''
+Can also navigate the tree in preorder, postorder and inorder'''
 
 
 def createTree(fileToRead):
-    '''Reads file: "fileToRead.txt". Then splits unique words into a list. 
+    '''Reads files inputted as arg. Then splits unique words into a list. 
     Keeps track of repeating words. Decapitilises characters. Removes punctuation from words. 
     Then calls a function to insert the words into the BST.'''
     fullWordList = []#all words read from file
     uniqueWordList = []#unique words from file
-
-
-    
     
     fullWordList = readFile(fileToRead)
     if fullWordList == 0:#if file was empty or invalid, end
@@ -31,10 +28,12 @@ def createTree(fileToRead):
         treeInsert(tree,word)
     return tree
 
+
+
 def readFile(fileToRead):
     '''createTree() helper function.
     Read a file and return words it contains as a list'''
-    
+   
     fileWordList = []
     if (isinstance(fileToRead, str)==False) or (punctuation in fileToRead):
         raise Exception("Invalid file name") 
@@ -56,8 +55,6 @@ def readFile(fileToRead):
     except FileNotFoundError:
         print('File does not exist')
         return 0
-
-
 
     
 def removeReapetedWords(wordList):
@@ -91,11 +88,10 @@ class BinTreeNode(object):
         self.left=None 
         self.right=None
         self.parent=parent 
-        
- 
+  
        
 def treeInsert(tree, insertWord):
-    '''Recursive function: Inserts word into the BST by comparing words'''
+    '''Recursive function: Inserts string into the BST by comparing strings lexicographically '''
     if tree==None:
         tree=BinTreeNode(insertWord,None)
     else:
@@ -110,8 +106,6 @@ def treeInsert(tree, insertWord):
             else:
                 treeInsert(tree.left,insertWord)
     return tree
-
-
         
 def searchNode (tree, searchWord): 
     '''Recursive function: Searches the BST for searchWord.
@@ -130,6 +124,7 @@ def searchNode (tree, searchWord):
             if tree.word<searchWord:
                 return searchNode(tree.right,searchWord)
 
+            
 def inorder(tree):
     '''Recursive function: returns a list of the the tree in alphabetical order'''
     traversalList = []
@@ -145,17 +140,14 @@ def preorder(tree):
     if tree == None:
         print("Tree does not exist.")
         return 
-
     print(tree.word)
     if (tree.left!=None):
         preorder(tree.left)
     if (tree.right!=None):
         preorder(tree.right)
      
-
 def postorder(tree):
     '''Recursive function: Prints the tree in postorder'''
-
     if tree == None:
         print("Tree does not exist.")
         return
@@ -164,8 +156,7 @@ def postorder(tree):
     if(tree.right!=None):
         postorder(tree.right)
     print(tree.word)
-
-
+    
 
  
 if __name__ == '__main__':
@@ -176,7 +167,3 @@ if __name__ == '__main__':
 
     print("______________")
     searchNode(tree, "publication")
-
-
- 
-    
